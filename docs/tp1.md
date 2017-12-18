@@ -1,6 +1,6 @@
-#TP1 : Setup the environment
+# TP1 : Setup the environment
 
-##Fork the project
+## Fork the project
 
 First go into the [repository](https://github.com/Faylixe/ceri-m1-test-2017)
 (and guess what, you already are) and fork it into your account by clicking on
