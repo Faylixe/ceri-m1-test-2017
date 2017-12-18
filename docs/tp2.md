@@ -12,13 +12,20 @@ update event automatically.
 
 ### Create .circleci/config.yml
 
-In order to define what your CI will do for your repository you need to write a configuration file in your repository.
-This file should be located at ``.circleci/config.yml`` and contains at least a job on *master* branch using
+In order to define what your CI will do for your project you need to write a configuration file in your repository.
+This file should be located at ``.circleci/config.yml`` and contains at least one job on *master* branch using
 an *oracle-jdk8* docker image, and which executes build and test goal on maven.
 
 You can use [official documentation](https://circleci.com/docs/2.0/) which contains configuration specs, as sample
 configuration file as well.
 
-## Configure Covecov
+## Configure Covecov and Codacy
 
-## Configure Codacy
+As for [CircleCI](https://circleci.com/) you will now connect to your repository following services :
+
+- [*Codecov*](https://codecov.io) which manages test coverage report
+- [*Codacy*](https://www.codacy.com/) which will manage project code quality
+
+You may need to add tasks into your ``pom.xml`` and ``.circleci/config.yml`` in order to submit information
+to those services through continuous integration.
+
