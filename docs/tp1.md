@@ -2,7 +2,7 @@
 
 ## Fork the project
 
-[!fork]()
+[!fork](https://github.com/Faylixe/ceri-m2-test-2017/blob/master/docs/images/fork.png?raw=true)
 
 ## Create POM.xml
 
