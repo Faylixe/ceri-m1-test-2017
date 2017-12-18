@@ -37,3 +37,8 @@ mvn validate
 ```
 
 ## Import project into Eclipse
+
+Finally we will now import the project into Eclipse as a maven project. Use the import tool ``File > Import``,
+select ``existing maven project`` and finalize the import.
+
+![eclipse](https://github.com/Faylixe/ceri-m1-test-2017/blob/master/docs/images/eclipse.png?raw=true)
