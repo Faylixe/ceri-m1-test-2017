@@ -29,3 +29,6 @@ an **IEnvironmentProvider** which is in charge of retrieving game metadata throu
 
 Finally the player progression can be controlled by the **IGameState**, and such object are created through
 **IGameStateProvider** instance. 
+
+The API javadoc can be found [here](http://faylixe.fr/ceri-m1-test-2017/javadoc) and is summerized by following class diagram :
+
