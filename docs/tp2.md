@@ -23,9 +23,17 @@ configuration file as well.
 
 As for [CircleCI](https://circleci.com/) you will now connect to your repository following services :
 
-- [*Codecov*](https://codecov.io) which manages test coverage report
-- [*Codacy*](https://www.codacy.com/) which will manage project code quality
+- [Codecov](https://codecov.io) which will manage test coverage report
+- [Codacy](https://www.codacy.com/) which will manage project code quality
 
 You may need to add tasks into your ``pom.xml`` and ``.circleci/config.yml`` in order to submit information
 to those services through continuous integration.
+
+## Workflow
+
+Once every services are configured, you need to ensure that the following development workflow is operational :
+
+- Push on your repository trigger CI
+- CI compile your project and run unit tests
+- CI generate report and send them to [Codecov](https://codecov.io) and [Codacy](https://www.codacy.com/)
 
