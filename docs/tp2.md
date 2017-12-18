@@ -5,8 +5,6 @@
 [CircleCI](https://circleci.com/) provide free continuous integration service based on Docker container.
 First go to [CircleCI index](https://circleci.com/) and sign up using your GitHub account.
 
-![signup](https://github.com/Faylixe/ceri-m1-test-2017/blob/master/docs/images/cisignup.png?raw=true)
-
 Then use the dashboard to connect your repository (``Projects > Add project``), which will trigger CI for any repository
 update event automatically.
 
@@ -29,7 +27,7 @@ As for [CircleCI](https://circleci.com/) you will now connect to your repository
 You may need to add tasks into your ``pom.xml`` and ``.circleci/config.yml`` in order to submit information
 to those services through continuous integration.
 
-## Workflow
+## Development workflow
 
 Once every services are configured, you need to ensure that the following development workflow is operational :
 
