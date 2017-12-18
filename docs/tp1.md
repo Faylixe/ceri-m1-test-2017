@@ -1,5 +1,7 @@
 # TP1 : Setup the environment
 
+bla 
+
 ## Fork the project
 
 First go into the [repository](https://github.com/Faylixe/ceri-m1-test-2017)
@@ -17,5 +19,8 @@ git clone https://github.com/your_username/ceri-m1-test-2017
 
 ## Create POM.xml
 
+bla
 
 ## Import project into Eclipse
+
+bla
