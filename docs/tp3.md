@@ -1,8 +1,8 @@
 # TP3 : Unit testing
 
 Now that our project is configured properly and CI is operational we can start writing unit tests for the existing API.
-We want a maximum coverage score for our unit tests, which will be written for all existing *interface*, and will be
-reused we concrete implementation later to ensure that there is no regression during development.
+We want a maximum coverage score for our unit tests, which will be written for all existing *interfaces*, and will be
+reused with concrete implementation later to ensure that there is no regression during development.
 
 First create a new directory ``src/test/java`` in which test classes will be located under ``fr.univavignon.rodeo``
 package. Ensure ``pom.xml`` is up to date and can handle this new test source directory. We are expecting 6 test cases :
@@ -17,7 +17,7 @@ package. Ensure ``pom.xml`` is up to date and can handle this new test source di
 For each test case, external dependencies should use mock instance through [Mockito](http://site.mockito.org/) library.
 And for associated interface test, target instance should also be created as mock instance.
 
-## Rodeo Stampede
+## Rodeo Stampede
 
 This project is based on the mobile game [Rodeo Stampede](http://rodeo-stampede.wikia.com/wiki/Rodeo_Stampedia)
 which consists in catching differents variation of animal specie to create an amazing zoo which will make you rich.
