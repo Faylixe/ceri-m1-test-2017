@@ -15,6 +15,25 @@ your machine by using the following command :
 git clone https://github.com/your_username/ceri-m1-test-2017
 ```
 
+Be careful and don't forget to replace **your_username** by your real username in the URL.
+
 ## Create POM.xml
 
-## Import project into Eclipse
+The repository you have forked only contains the project API in a java package.
+In order to make your project useable we will write a ``pom.xml`` file which will
+turn your project into a valid [Maven](https://maven.apache.org) project.
+
+The written ``pom.xml`` should contains at least :
+
+- Project metadata (name, author, url).
+- Project version using [semantic versionning](https://semver.org/).
+- Lifecycle definition, such as build and test.
+- Dependency list with at least **JUnit**.
+
+To ensure your file is valid and your project ready, you can use the following command :
+
+```bash
+mvn validate
+```
+
+## Import project into Eclipse
