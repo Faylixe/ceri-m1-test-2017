@@ -17,6 +17,9 @@ package. Ensure ``pom.xml`` is up to date and can handle this new test source di
 For each test case, external dependencies should use mock instance through [Mockito](http://site.mockito.org/) library.
 And for associated interface test, target instance should also be created as mock instance.
 
+You have to ensure that the code coverage and quality does not regress through development using
+previously configured platform.
+
 ## Rodeo Stampede
 
 This project is based on the mobile game [Rodeo Stampede](http://rodeo-stampede.wikia.com/wiki/Rodeo_Stampedia)
