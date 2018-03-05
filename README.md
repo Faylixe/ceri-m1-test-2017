@@ -2,6 +2,10 @@
 
 ## Resources
 
+### Cours
+
+- [Slide#1](https://github.com/Faylixe/ceri-m2-test-2017/blob/master/docs/cours.pdf)
+
 ### TP
 
 - [API javadoc](http://faylixe.fr/ceri-m1-test-2017/javadoc)
