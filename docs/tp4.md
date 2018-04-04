@@ -10,4 +10,4 @@ to ensure that written code is correct according to *Codacy* repoting.
 
 Finally you need to set up badges into your repository *README* file. Badges can be obtained through project configuration pages on each platform (*CircleCI*, *Codecov*, *Codacy*).
 
-[![badges]](https://)
+![api](https://github.com/Faylixe/ceri-m1-test-2017/blob/master/docs/images/badges.png?raw=true)
