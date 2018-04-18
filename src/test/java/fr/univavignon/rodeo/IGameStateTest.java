@@ -12,7 +12,7 @@ import fr.univavignon.rodeo.api.SpecieLevel;
 public class IGameStateTest{
 		
 	private static ISpecie specie;
-	private static SpecieLevel speeLevl;
+
 	protected static IGameState getTestInstance(){
 		IGameState gs = Mockito.mock(IGameState.class);
 		Mockito.when(gs.getProgression()).thenReturn(10);
