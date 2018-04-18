@@ -6,8 +6,6 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import fr.univavignon.rodeo.api.IGameState;
-import fr.univavignon.rodeo.api.ISpecie;
-import fr.univavignon.rodeo.api.SpecieLevel;
 
 public class IGameStateTest{
 		
