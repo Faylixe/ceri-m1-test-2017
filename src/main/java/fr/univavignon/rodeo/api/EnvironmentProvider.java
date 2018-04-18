@@ -5,14 +5,14 @@ import java.util.List;
 
 public class EnvironmentProvider implements IEnvironmentProvider{
 
-	private List<IEnvironment> listAllEvironments;
+	/*private List<IEnvironment> listAllEvironments;
 	private List<String> listAvailbaleEvironments;
 
 	
 	public EnvironmentProvider(){
 		listAllEvironments = new ArrayList<IEnvironment>();
 		listAvailbaleEvironments = new ArrayList<String>();
-	}
+	}*/
 
 	@Override
 	public List<String> getAvailableEnvironments() {
