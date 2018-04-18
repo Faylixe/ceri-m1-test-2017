@@ -16,7 +16,7 @@ import fr.univavignon.rodeo.api.IEnvironmentProvider;
  */
 public class IEnvironmentProviderTest{
 	
-	static List<String> environments;
+	private static List<String> environments;
 	static IEnvironment ie;
 	
 	protected IEnvironmentProvider getTestInstance(){
