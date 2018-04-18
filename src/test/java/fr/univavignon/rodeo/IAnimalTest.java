@@ -15,18 +15,26 @@ public class IAnimalTest{
 	
 	protected static IAnimal getTestInstance(){
 		IAnimal animal = Mockito.mock(IAnimal.class);
-		Mockito.when(animal.getXP()).thenReturn(0);
+		Mockito.when(animal.getXP()).thenReturn(12);
 		Mockito.when(animal.isSecret()).thenReturn(true);
 		Mockito.when(animal.isEndangered()).thenReturn(true);
 		Mockito.when(animal.isBoss()).thenReturn(true);
+		Mockito.when(animal.getName()).thenReturn("name");
 		return animal;
 	}
 
 	@Test
+	public void testName(){
+		final IAnimal animal = getTestInstance();
+		final String name = animal.getName();
+		assertEquals("name", name);
+	}	
+	
+	@Test
 	public void testXP(){
 		final IAnimal animal = getTestInstance();
 		final int xp = animal.getXP();
-		assertEquals(0, xp);
+		assertEquals(12, xp);
 	}	
 	
 	@Test

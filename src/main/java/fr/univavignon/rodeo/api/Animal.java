@@ -3,7 +3,7 @@ package fr.univavignon.rodeo.api;
 public class Animal implements IAnimal {
 	
 	private String name;
-	private int xps = 0;
+	private int xps;
 	private boolean secretAnimal;
 	private boolean endangeredAnimal;
 	private boolean boss;
