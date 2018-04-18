@@ -10,25 +10,12 @@ import fr.univavignon.rodeo.api.ISpecie;
 import fr.univavignon.rodeo.api.SpecieLevel;
 
 public class IGameStateTest{
-	
-	private static ISpecie is;
-	private static SpecieLevel sl;
-	
+		
 	protected static IGameState getTestInstance(){
 		IGameState gs = Mockito.mock(IGameState.class);
 		Mockito.when(gs.getProgression()).thenReturn(10);
-		is = ISpecieTest.getTestInstance();
-		//sl = Mockito.mock(SpecieLevel.class);
-		//Mockito.when(gs.getSpecieLevel(is)).thenReturn(sl);
 		return gs;
 	}
-		
-	/*@Test
-	public void testSpecieLevel(){
-		final IGameState gameS = getTestInstance();
-		final SpecieLevel progression = gameS.getSpecieLevel(is);
-		assertEquals(is, progression);
-	}	*/	
 	
 	@Test
 	public void testProgression(){
