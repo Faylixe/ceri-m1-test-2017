@@ -3,8 +3,8 @@ package fr.univavignon.rodeo.api;
 
 public class Animal implements IAnimal {
 	
-	String name;
-	int xps;
+	private String name;
+	private int xps;
 	
 	@Override
 	public String getName() {
