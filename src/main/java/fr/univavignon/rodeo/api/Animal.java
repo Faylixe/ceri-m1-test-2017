@@ -1,6 +1,5 @@
 package fr.univavignon.rodeo.api;
 
-
 public class Animal implements IAnimal {
 	
 	private String name;
@@ -29,25 +28,16 @@ public class Animal implements IAnimal {
 
 	@Override
 	public boolean isSecret() {
-		if(secretAnimal == true){
-			return true;
-		}
-		return false;
+		return secretAnimal;
 	}
 
 	@Override
 	public boolean isEndangered() {
-		if(endangeredAnimal == true){
-			return true;
-		}
-		return false;
+		return endangeredAnimal;
 	}
 
 	@Override
 	public boolean isBoss() {
-		if(boss == true){
-			return true;
-		}
-		return false;
+		return boss;
 	}
 }
