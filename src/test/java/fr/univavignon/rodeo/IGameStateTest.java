@@ -21,7 +21,5 @@ public class IGameStateTest{
 		final int progression = gameS.getProgression();
 		assertEquals(10, progression);
 	}
-	
-	
 }
 
