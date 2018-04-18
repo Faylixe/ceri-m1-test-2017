@@ -18,7 +18,7 @@ import fr.univavignon.rodeo.api.ISpecie;
  */
 public class IEnvironmentTest{
 	
-	static List<ISpecie> species;
+	private static List<ISpecie> species;
 	
 	protected static IEnvironment getTestInstance(){	
 		species  = new ArrayList<ISpecie>();

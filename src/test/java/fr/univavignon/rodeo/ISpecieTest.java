@@ -17,7 +17,7 @@ import org.junit.Test;
  */
 public class ISpecieTest{
 	
-	static List<IAnimal> animals;
+	private static List<IAnimal> animals;
 	 	
 	protected static ISpecie getTestInstance(){
 		animals  = new ArrayList<IAnimal>();

@@ -11,8 +11,8 @@ import fr.univavignon.rodeo.api.SpecieLevel;
 
 public class IGameStateTest{
 	
-	static ISpecie is;
-	static SpecieLevel sl;
+	private static ISpecie is;
+	private static SpecieLevel sl;
 	
 	protected static IGameState getTestInstance(){
 		IGameState gs = Mockito.mock(IGameState.class);

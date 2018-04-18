@@ -15,7 +15,7 @@ import fr.univavignon.rodeo.api.IGameStateProvider;
  */
 public class IGameStateProviderTest{
 	
-	static IGameState gs;
+	private static IGameState gs;
 	
 	protected static IGameStateProvider getTestInstance(){
 		IGameStateProvider gameStateProvider = Mockito.mock(IGameStateProvider.class);
