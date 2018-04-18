@@ -28,7 +28,7 @@ public class IAnimalTest{
 		final IAnimal animal = getTestInstance();
 		final String name = animal.getName();
 		assertEquals("name", name);
-	}	
+	}
 	
 	@Test
 	public void testXP(){

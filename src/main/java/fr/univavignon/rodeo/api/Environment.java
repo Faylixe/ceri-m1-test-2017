@@ -7,11 +7,13 @@ public class Environment implements IEnvironment{
 	private String name;
 	private int areas;
 	private List<ISpecie> listSpecies;
+	private boolean available;
 	
 	public Environment(String name, int areas){
 		this.name = name;
 		this.areas = areas;
 		listSpecies = new ArrayList<ISpecie>();
+		available = true;
 	}
 	
 	public void addAnimal(Specie s){
@@ -28,6 +30,10 @@ public class Environment implements IEnvironment{
 	@Override
 	public int getAreas() {
 		return this.areas;
+	}
+	@Override
+	public boolean availability() {
+		return this.available;
 	}
 
 	@Override
