@@ -41,5 +41,4 @@ public enum SpecieLevel {
 	public int getRequiredXP() {
 		return requiredXP;
 	}
-
 }

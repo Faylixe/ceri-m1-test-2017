@@ -24,7 +24,6 @@ public class EnvironmenetProviderTest {
 		
 		Assert.assertEquals(env, envPr.getEnvironment("Savannah"));
 		Assert.assertEquals(null, envPr.getEnvironment("Sa"));
-
 	}
 
 }

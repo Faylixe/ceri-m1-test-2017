@@ -27,16 +27,15 @@ public class EnvironmentProvider implements IEnvironmentProvider{
 	@Override
 	public IEnvironment getEnvironment(String name)
 			throws IllegalArgumentException {
-		try{
+			if(name.equals(null)){
+				throw new IllegalArgumentException("Illegal argument");
+			}
+		
 			for(IEnvironment env : listEnv){
 				if(env.getName().equals(name)){
 					return env;
 				}	
 			}
-		}catch(IllegalArgumentException e){
-			System.out.println("Illegal arguement exception");
-			return null;
-		}
 		return null;
 	}
 	
