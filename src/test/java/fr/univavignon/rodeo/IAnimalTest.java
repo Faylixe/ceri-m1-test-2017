@@ -33,6 +33,7 @@ public class IAnimalTest{
 	@Test
 	public void testXP(){
 		final IAnimal animal = getTestInstance();
+		//System.out.println(animal.getXP());
 		final int xp = animal.getXP();
 		assertEquals(12, xp);
 	}	
