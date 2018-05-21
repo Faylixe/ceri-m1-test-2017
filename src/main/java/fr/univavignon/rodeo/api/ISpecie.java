@@ -20,7 +20,7 @@ public interface ISpecie extends INamedObject {
 	/**
 	 * Associated animals getter.
 	 * 
-	 * @return List of available animal for this specie.
+	 * @return List of available animal for this species.
 	 */
 	List<IAnimal> getAnimals();
 

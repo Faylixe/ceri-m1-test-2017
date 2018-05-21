@@ -15,10 +15,12 @@ public class Specie implements ISpecie{
 		listAnimals = new ArrayList<IAnimal>();
 	}
 	
-	public void addAnimal(Animal a){
+	public boolean addAnimal(Animal a){
 		if(a != null) {
 			listAnimals.add(a);
+			return true;
 		}
+		return false;
 	}
 
 	@Override
