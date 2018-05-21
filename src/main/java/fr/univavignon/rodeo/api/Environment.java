@@ -17,8 +17,8 @@ public class Environment implements IEnvironment{
 	}
 	
 	public boolean addSpecie(Specie s){
-			listSpecies.add(s);
-			return true;
+		listSpecies.add(s);
+		return true;
 	}
 	
 	@Override

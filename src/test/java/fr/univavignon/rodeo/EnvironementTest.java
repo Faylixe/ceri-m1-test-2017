@@ -21,6 +21,9 @@ public class EnvironementTest extends IEnvironmentTest{
 
 		final Specie specie = new Specie("Giraffe", 11);
 		List<Specie> listSpecies = new ArrayList<Specie>();
-		Assert.assertEquals(true, listSpecies.add(specie));
+		Assert.assertEquals(true, env.addSpecie(specie));
+		
+		listSpecies.add(specie);
+		Assert.assertEquals(listSpecies, env.getSpecies());	
 	}
 }
