@@ -27,4 +27,6 @@ public interface IEnvironment extends INamedObject {
 	 */
 	List<ISpecie> getSpecies();
 
+	boolean availability();
+
 }
