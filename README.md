@@ -16,3 +16,9 @@
 ### External
 
 - [JUnit 5 documentation](http://junit.org/junit5/docs/current/user-guide)
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/a17b4e71ab2440c9bd688ee1779b32b9)](https://www.codacy.com/app/alexamoshina/ceri-m1-test-2017?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=alexamoshina/ceri-m1-test-2017&amp;utm_campaign=Badge_Grade)
+
+[![codecov](https://codecov.io/gh/alexamoshina/ceri-m1-test-2017/branch/master/graph/badge.svg)](https://codecov.io/gh/alexamoshina/ceri-m1-test-2017)
+
+
