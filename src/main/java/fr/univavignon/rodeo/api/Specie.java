@@ -16,11 +16,8 @@ public class Specie implements ISpecie{
 	}
 	
 	public boolean addAnimal(Animal a){
-		if(a != null) {
 			listAnimals.add(a);
 			return true;
-		}
-		return false;
 	}
 
 	@Override
