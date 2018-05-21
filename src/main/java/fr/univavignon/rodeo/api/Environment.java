@@ -16,10 +16,9 @@ public class Environment implements IEnvironment{
 		available = true;
 	}
 	
-	public void addAnimal(Specie s){
-		if(s != null) {
+	public boolean addSpecie(Specie s){
 			listSpecies.add(s);
-		}
+			return true;
 	}
 	
 	@Override
