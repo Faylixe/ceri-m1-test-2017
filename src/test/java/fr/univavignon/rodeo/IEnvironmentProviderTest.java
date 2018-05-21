@@ -46,5 +46,4 @@ public class IEnvironmentProviderTest{
 		final List<String> listA = environmentp.getAvailableEnvironments();
 		assertEquals(environments, listA);
 	}	
-	
 }
