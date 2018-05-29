@@ -53,7 +53,7 @@ class SynthesisBuilder(object):
 
     def _get_json(self, url_pattern):
         """ Retrieves JSON response from given URL pattern. """
-        url = _CODACY % self._username
+        url = url_pattern % self._username
         response = get(url, headers={'api_token': self._codacy_token})
         if response.status_code != 200:
             raise IOError('Unable to access to endpoint %s' % url)
@@ -127,6 +127,7 @@ def _get_forks():
     return usernames
 
 if __name__ == '__main__':
+    logging.basicConfig(level=logging.INFO, format='[%(asctime)s][%(levelname)s] %(message)s', datefmt='%Y-%m-%d %I:%M:%S')
     parser = ArgumentParser()
     parser.add_argument('--token')
     parser.add_argument('--output')
@@ -134,7 +135,7 @@ if __name__ == '__main__':
     students = _get_forks()
     with open(args.output, 'w') as stream:
         if students is not None:
-            print(','.join(_KEYS))
+            stream.write(','.join(_KEYS))
             for student in students:
                 builder = SynthesisBuilder(student, args.token)
                 stream.write(builder.build()))
