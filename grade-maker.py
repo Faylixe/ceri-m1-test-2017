@@ -4,13 +4,14 @@
 
 import logging
 
+from argparse import ArgumentParser
 from os.path import join
 from requests import get
 from subprocess import call
 from tempfile import mkdtemp
 
 
-_CODACY = 'https://app.codacy.com/project/%s/ceri-m1-test-2017/dashboard'
+_CODACY = 'https://api.codacy.com/2.0/%s/ceri-m1-test-2017'
 _CODECOV = 'https://codecov.io/api/gh/%s/ceri-m1-test-2017'
 _CIRCLECI = 'https://circleci.com/api/v1.1/project/github/%s/ceri-m1-test-2017'
 _GITHUB = 'https://github.com/%s/ceri-m1-test-2017'
@@ -28,17 +29,35 @@ _KEYS = (
     'codacy grade'
 )
 
+def _json_path_valid(data, path):
+    """ Indicates if the given path if valid for given json data. """
+    current = data
+    for node in path.split('.'):
+        if node not in current:
+            return False
+        current = current[node]
+    return True
+
 
 class SynthesisBuilder(object):
     """ Class responsible for creating student synthesis. """
 
-    def __init__(self, username):
+    def __init__(self, username, codacy_token):
         """ Default constructor. """
         self._username = username
+        self._codacy_token = codacy_token
         self._workspace = mkdtemp()
         self._synthesis = {}
         for key in _KEYS:
             self._synthesis[key] = 0
+
+    def _get_json(self, url_pattern):
+        """ Retrieves JSON response from given URL pattern. """
+        url = _CODACY % self._username
+        response = get(url, headers={'api_token': self._codacy_token})
+        if response.status_code != 200:
+            raise IOError('Unable to access to endpoint %s' % url)
+        return response.json()
 
     def _evaluate_pom(self):
         """ Evaluate POM. """
@@ -52,40 +71,29 @@ class SynthesisBuilder(object):
 
     def _evaluate_codacy(self):
         """ Evaluate codacy configuration and grade. """
-        url = _CODACY % self._username
-        grade = None # TODO : Retrieve grade
-        self._synthesis['codacy setup'] = 0.5
-        if grade == 'A':
-            self._synthesis['codacy grade'] = 2
-        elif grade == 'B':
-            self._synthesis['codacy grade'] = 1
+        data = self._get_json(_CODACY)
+        if _json_path_valid(data, 'commit.commit.grade'):
+            grade = data['commit']['commit']['grade']
+            self._synthesis['codacy setup'] = 0.5
+            if grade == 'A':
+                self._synthesis['codacy grade'] = 2
+            elif grade == 'B':
+                self._synthesis['codacy grade'] = 1
 
     def _evaluate_codecov(self):
         """ Evaluates codecov integration. """
-        url = _CODECOV % self._username
-        response = get(url)
-        if response.status_code != 200:
-            raise IOError('Unable to access to CodeCov endpoint')
-        data = response.json()
-        if 'error' not in data and 'commit' in data:
-            commit = data['commit']
-            if 'totals' in commit:
-                totals = commit['totals']
-                if 'c' in totals:
-                    coverage = totals['c']
-                    self._synthesis['codecov setup'] = 0.5
-                    if coverage > 85:
-                        self._synthesis['coverage rate'] = 2
-                    elif coverage > 69:
-                        self._synthesis['coverage rate'] = 1
+        data = self._get_json(_CODECOV)
+        if 'error' not in data and _json_path_valid('commit.totals.c'):
+            coverage = data['commit']['totals']['c']
+            self._synthesis['codecov setup'] = 0.5
+            if coverage > 85:
+                self._synthesis['coverage rate'] = 2
+            elif coverage > 69:
+                self._synthesis['coverage rate'] = 1
 
     def _evaluate_circleci(self):
         """ Evaluation CircleCI integration. """
-        url = _CIRCLECI % self._username
-        response = get(url)
-        if response.status_code != 200:
-            raise IOError('Unable to access to CircleCI endpoint')
-        data = response.json()
+        data = self._get_json(_CIRCLECI)
         if 'message' in data and data['message'] == 'Project not found':
             logging.warn('CircleCI not configured for project %s/ceri-m1-test-2017' % self._username)
         else:
@@ -119,10 +127,14 @@ def _get_forks():
     return usernames
 
 if __name__ == '__main__':
+    parser = ArgumentParser()
+    parser.add_argument('--token')
+    parser.add_argument('--output')
+    args = parser.parse_args()
     students = _get_forks()
-    with open('synthesis.csv', 'w') as stream:
+    with open(args.output, 'w') as stream:
         if students is not None:
             print(','.join(_KEYS))
             for student in students:
-                builder = SynthesisBuilder(student)
+                builder = SynthesisBuilder(student, args.token)
                 stream.write(builder.build()))
