@@ -18,6 +18,8 @@ _GITHUB = 'https://github.com/%s/ceri-m1-test-2017'
 _GITHUB_FORK = 'https://api.github.com/repos/Faylixe/ceri-m1-test-2017/forks?per_page=100'
 
 _KEYS = (
+    'username',
+    'repository',
     'pom.xml',
     '.circleci/config.yml',
     'codacy setup',
@@ -48,10 +50,10 @@ class SynthesisBuilder(object):
         self._codacy_token = codacy_token
         self._workspace = mkdtemp()
         self._synthesis = {}
-        self._synthesis['username'] = username
-        self._synthesis['repository'] = _GITHUB % username
         for key in _KEYS:
             self._synthesis[key] = 0
+        self._synthesis['username'] = username
+        self._synthesis['repository'] = _GITHUB % username
 
     def _get_json(self, url_pattern):
         """ Retrieves JSON response from given URL pattern. """
