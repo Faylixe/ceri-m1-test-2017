@@ -30,6 +30,7 @@ _KEYS = (
 
 
 class SynthesisBuilder(object):
+    """ Class responsible for creating student synthesis. """
 
     def __init__(self, username):
         """ Default constructor. """
@@ -66,13 +67,17 @@ class SynthesisBuilder(object):
         if response.status_code != 200:
             raise IOError('Unable to access to CodeCov endpoint')
         data = response.json()
-        # TODO : Check for error.
-        coverage = data['coverage']
-        self._synthesis['codecov setup'] = 0.5
-        if coverage > 85:
-            self._synthesis['coverage rate'] = 2
-        elif coverage > 69:
-            self._synthesis['coverage rate'] = 1
+        if 'error' not in data and 'commit' in data:
+            commit = data['commit']
+            if 'totals' in commit:
+                totals = commit['totals']
+                if 'c' in totals:
+                    coverage = totals['c']
+                    self._synthesis['codecov setup'] = 0.5
+                    if coverage > 85:
+                        self._synthesis['coverage rate'] = 2
+                    elif coverage > 69:
+                        self._synthesis['coverage rate'] = 1
 
     def _evaluate_circleci(self):
         """ Evaluation CircleCI integration. """
@@ -115,8 +120,9 @@ def _get_forks():
 
 if __name__ == '__main__':
     students = _get_forks()
-    if students is not None:
-        print(','.join(_KEYS))
-        for student in students:
-            builder = SynthesisBuilder(student)
-            print(builder.build())
+    with open('synthesis.csv', 'w') as stream:
+        if students is not None:
+            print(','.join(_KEYS))
+            for student in students:
+                builder = SynthesisBuilder(student)
+                stream.write(builder.build()))
