@@ -14,6 +14,19 @@ _CODACY = 'https://app.codacy.com/project/%s/ceri-m1-test-2017/dashboard'
 _CODECOV = 'https://codecov.io/api/gh/%s/ceri-m1-test-2017'
 _CIRCLECI = 'https://circleci.com/api/v1.1/project/github/%s/ceri-m1-test-2017'
 _GITHUB = 'https://github.com/%s/ceri-m1-test-2017'
+_GITHUB_FORK = 'https://api.github.com/repos/Faylixe/ceri-m1-test-2017/forks?per_page=100'
+
+_KEYS = (
+    'pom.xml',
+    '.circleci/config.yml',
+    'codacy setup',
+    'codecov setup',
+    'circleci setup',
+    'unit tests',
+    'implementation',
+    'coverage rate',
+    'codacy grade'
+)
 
 
 class SynthesisBuilder(object):
@@ -22,17 +35,9 @@ class SynthesisBuilder(object):
         """ Default constructor. """
         self._username = username
         self._workspace = mkdtemp()
-        self._synthesis = {
-            'pom.xml': 0,
-            '.circleci/config.yml': 0,
-            'codacy setup': 0,
-            'codecov setup': 0,
-            'circleci setup': 0,
-            'unit tests': 0,
-            'implementation': 0,
-            'coverage rate': 0,
-            'codacy grade': 0
-        }
+        self._synthesis = {}
+        for key in _KEYS:
+            self._synthesis[key] = 0
 
     def _evaluate_pom(self):
         """ Evaluate POM. """
@@ -91,3 +96,27 @@ class SynthesisBuilder(object):
         self._evaluate_circleci()
         self._evaluate_codecov()
         self._evaluate_codacy()
+        output = []
+        for key in _KEYS:
+            output.append(self._synthesis[key])
+        return ','.join(output)
+
+
+def _get_forks():
+    """ Retrieves all forks from original repository. """
+    response = get(_GITHUB_FORK)
+    if response.status_code != 200:
+        logging.error('Unable to check forks (status code : %s)' % response.status_code)
+        return
+    usernames = []
+    for fork in response.json():
+        usernames.append(fork['owner']['login'])
+    return usernames
+
+if __name__ == '__main__':
+    students = _get_forks()
+    if students is not None:
+        print(','.join(_KEYS))
+        for student in students:
+            builder = SynthesisBuilder(student)
+            print(builder.build())
