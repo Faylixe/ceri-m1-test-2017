@@ -48,6 +48,8 @@ class SynthesisBuilder(object):
         self._codacy_token = codacy_token
         self._workspace = mkdtemp()
         self._synthesis = {}
+        self._synthesis['username'] = username
+        self._synthesis['repository'] = _GITHUB % username
         for key in _KEYS:
             self._synthesis[key] = 0
 
@@ -56,18 +58,26 @@ class SynthesisBuilder(object):
         url = url_pattern % self._username
         response = get(url, headers={'api_token': self._codacy_token})
         if response.status_code != 200:
-            raise IOError('Unable to access to endpoint %s' % url)
+            logging.error('Unable to access to endpoint %s' % url)
         return response.json()
 
     def _evaluate_pom(self):
         """ Evaluate POM. """
         url = _GITHUB % self._username
         logging.info('Cloning repository %s' % url)
-        if call(['git', 'clone', url], cwd=self._workspace) != 0:
-            raise IOError('Cannot clone git repository %s' % url)
+        retry = 0
+        success = False
+        while retry < 10:
+            if call(['git', 'clone', url], cwd=self._workspace) != 0:
+                logging.error('Cannot clone git repository %s, retry %s' % (url, retry))
+                retry += 1
+            else:
+                retry = 10
+                success = True
         logging.info('Validate POM.xml')
-        if call(['mvn', 'validate'], cwd=join(self._workspace, 'ceri-m1-test-2017')) == 0:
-            self._synthesis['pom.xml'] = 0.5
+        if success:
+            if call(['mvn', 'validate'], cwd=join(self._workspace, 'ceri-m1-test-2017')) == 0:
+                self._synthesis['pom.xml'] = 0.5
 
     def _evaluate_codacy(self):
         """ Evaluate codacy configuration and grade. """
@@ -83,7 +93,7 @@ class SynthesisBuilder(object):
     def _evaluate_codecov(self):
         """ Evaluates codecov integration. """
         data = self._get_json(_CODECOV)
-        if 'error' not in data and _json_path_valid('commit.totals.c'):
+        if 'error' not in data and _json_path_valid(data,'commit.totals.c'):
             coverage = float(data['commit']['totals']['c'])
             self._synthesis['codecov setup'] = 0.5
             if coverage > 85:
@@ -97,10 +107,11 @@ class SynthesisBuilder(object):
         if 'message' in data and data['message'] == 'Project not found':
             logging.warn('CircleCI not configured for project %s/ceri-m1-test-2017' % self._username)
         else:
-            self._synthesis['circleci setup'] = 0.5
-            status = data[0]['status']
-            if status == "success":
-                self._synthesis['circleci setup'] = 1
+            if len(data) > 0:
+                self._synthesis['circleci setup'] = 0.5
+                status = data[0]['status']
+                if status == "success":
+                    self._synthesis['circleci setup'] = 1
 
     def build(self):
         """ Build synthesis for target user. """
@@ -111,7 +122,7 @@ class SynthesisBuilder(object):
         self._evaluate_codacy()
         output = []
         for key in _KEYS:
-            output.append(str(self._synthesis[key])
+            output.append(str(self._synthesis[key]))
         return ','.join(output)
 
 
@@ -135,8 +146,8 @@ if __name__ == '__main__':
     students = _get_forks()
     with open(args.output, 'w') as stream:
         if students is not None:
-            stream.write(','.join(_KEYS))
+            stream.write('%s\n' % ','.join(_KEYS))
             for student in students:
                 logging.info('Evaluating student %s' % student)
                 builder = SynthesisBuilder(student, args.token)
-                stream.write(builder.build()))
+                stream.write('%s\n' % builder.build())
