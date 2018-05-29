@@ -84,7 +84,7 @@ class SynthesisBuilder(object):
         """ Evaluates codecov integration. """
         data = self._get_json(_CODECOV)
         if 'error' not in data and _json_path_valid('commit.totals.c'):
-            coverage = data['commit']['totals']['c']
+            coverage = float(data['commit']['totals']['c'])
             self._synthesis['codecov setup'] = 0.5
             if coverage > 85:
                 self._synthesis['coverage rate'] = 2
@@ -111,7 +111,7 @@ class SynthesisBuilder(object):
         self._evaluate_codacy()
         output = []
         for key in _KEYS:
-            output.append(self._synthesis[key])
+            output.append(str(self._synthesis[key])
         return ','.join(output)
 
 
@@ -137,5 +137,6 @@ if __name__ == '__main__':
         if students is not None:
             stream.write(','.join(_KEYS))
             for student in students:
+                logging.info('Evaluating student %s' % student)
                 builder = SynthesisBuilder(student, args.token)
                 stream.write(builder.build()))
