@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-""" """
+""" Evaluates student from fork and generates CSV file with grade. """
 
 import logging
 
