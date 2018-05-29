@@ -67,7 +67,7 @@ class SynthesisBuilder(object):
         if coverage > 85:
             self._synthesis['coverage rate'] = 2
         elif coverage > 69:
-            self._synthesis['coverage rate'] = 2
+            self._synthesis['coverage rate'] = 1
 
     def _evaluate_circleci(self):
         """ Evaluation CircleCI integration. """
